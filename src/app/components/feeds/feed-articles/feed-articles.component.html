@@ -1,0 +1,20 @@
+<div *ngIf="articles?.length > 0">
+    <mat-accordion>
+        <mat-expansion-panel *ngFor="let article of articles">
+            <mat-expansion-panel-header>
+                {{ article.title }}
+            </mat-expansion-panel-header>
+            <a 
+                class="content_article" 
+                title="Voir Plus . . ." 
+                [href]="article.link" target="_blank"
+            >
+                <div class="article-image">
+                    <img [src]="article.enclosure?.link" [alt]="article.title">
+                </div>
+    
+                <p>{{ article.description }}</p>
+            </a>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

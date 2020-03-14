@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+    <span><a routerLink="/">WINNR-FEED</a></span>
+    <ul>      
+        <li><a mat-button routerLink="/feeds" routerLinkActive="mat-accent">Accueil</a></li>
+    </ul>
+    <span class="spacer"></span>
+    <ul>
+        <li *ngIf="!isAuthenticated"><a mat-button routerLink="/auth/signin" routerLinkActive="mat-accent">Connexion</a></li>
+        <li *ngIf="isAuthenticated"><button mat-button (click)="logout()">Deconnexion</button></li>
+    </ul>
+</mat-toolbar>
+

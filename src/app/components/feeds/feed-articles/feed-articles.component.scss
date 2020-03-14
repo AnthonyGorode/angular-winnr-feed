@@ -1,0 +1,37 @@
+mat-accordion {
+    mat-expansion-panel {
+        background-color: beige;
+        mat-expansion-panel-header {
+            font-size: 16px;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .content_article{
+            cursor: pointer;
+            color: black;
+            text-decoration: none;
+
+            .article-image {
+                width: 100%;
+            
+                img {
+                    width: 100%;
+                    height: 50vh;
+                    box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+                }
+            }
+
+            p {
+                font-size: 16px;
+                font-family: monospace;
+
+                background-color: antiquewhite;
+                border: 1px solid #c9c9c9;
+                padding: 5px;
+                border-radius: 10px;
+            }
+
+        }     
+    }
+}

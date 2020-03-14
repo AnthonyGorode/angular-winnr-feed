@@ -1,0 +1,25 @@
+<form [formGroup]="feedForm" class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="name" [errorStateMatcher]="errorMatcher">
+        <mat-error  *ngIf="feedForm.get('name').errors?.required">
+            Le nom est obligatoire
+        </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field class="example-full-width">
+        <mat-label>Url</mat-label>
+        <input 
+            matInput 
+            placeholder="ex : http://www.jeuxvideo.com/rss/rss-news.xml" 
+            formControlName="url"
+            [errorStateMatcher]="errorMatcher"
+        >
+        <mat-error  *ngIf="feedForm.get('url').errors?.required">
+            L'url est obligatoire
+        </mat-error>
+        <mat-error *ngIf="feedForm.get('url').errors?.url">
+            L'url n'est pas <strong>valide</strong>
+        </mat-error>
+    </mat-form-field>
+  </form>

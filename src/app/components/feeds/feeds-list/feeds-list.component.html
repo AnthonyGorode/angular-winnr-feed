@@ -1,0 +1,16 @@
+<div class="wrapper">
+    <div class="block_feed">
+        <mat-action-list>
+            <button 
+                *ngFor="let item of feedsList"
+                mat-list-item 
+                (click)="getFeedArticles(item.feed.url)"
+            > 
+                {{ item.feed.name }}
+                <span (click)="deleteRss($event,item.feed.id)">x</span> 
+            </button>
+        </mat-action-list>
+        <app-feed-create></app-feed-create>
+    </div>
+    <app-feed-articles [feed]="feed" [articles]="articles"></app-feed-articles>
+</div>

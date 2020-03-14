@@ -3,8 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
-};
+  production: false,
+  firebase: {
+    apiKey: "AIzaSyDdp-ijKEjpUZaRcqtch3A4qYpIv5R8KC8",
+    authDomain: "winnr-feed.firebaseapp.com",
+    databaseURL: "https://winnr-feed.firebaseio.com",
+    projectId: "winnr-feed",
+    storageBucket: "winnr-feed.appspot.com",
+    messagingSenderId: "369072042630",
+    appId: "1:369072042630:web:a7583faa7c15d90084d707"}
+  }
 
 /*
  * For easier debugging in development mode, you can import the following file
