@@ -27,6 +27,7 @@ export class FeedsListComponent implements OnInit {
   public getFeeds(): void {
     this.feedsService.getAllFeeds().subscribe(
       res => {
+        this.feedsList = [];
         res.map(doc => {
           this.feedsList.push({
             "id": doc.payload.doc.id,
@@ -62,7 +63,7 @@ export class FeedsListComponent implements OnInit {
 
   public deleteRss(event: Event,uid: string): void {
     event.stopPropagation();
-    console.log(uid);
+    this.feedsService.deleteFeed(uid);
   }
 
 }

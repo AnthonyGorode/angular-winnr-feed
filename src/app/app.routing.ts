@@ -7,7 +7,12 @@ const routes: Routes = [
     path: "feeds",
     loadChildren: () => import('./components/feeds/feeds.module').then(f => f.FeedsModule)
   },
-  { path: "", redirectTo: "/feeds", pathMatch: "full"}
+  {
+    path: "auth",
+    loadChildren: () => import('./components/auth/auth.module').then(a => a.AuthModule)
+  },
+  { path: "", redirectTo: "/feeds", pathMatch: "full"},
+  {path:'**', redirectTo: "/feeds", pathMatch: "full"}
 ];
 
 @NgModule({

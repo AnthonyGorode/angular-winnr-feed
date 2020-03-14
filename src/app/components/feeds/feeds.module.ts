@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatButtonModule } from '@angular/material/button';
 
 import { FeedsRoutingModule } from './feeds.routing';
 import { FeedsListComponent } from './feeds-list/feeds-list.component';
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         MatListModule,
         MatInputModule,
         MatExpansionModule,
+        MatButtonModule,
         FeedsRoutingModule
     ],
 })

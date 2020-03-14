@@ -7,7 +7,7 @@
                 (click)="getFeedArticles(item.feed.url)"
             > 
                 {{ item.feed.name }}
-                <span (click)="deleteRss($event,item.feed.id)">x</span> 
+                <span (click)="deleteRss($event,item.id)">x</span> 
             </button>
         </mat-action-list>
         <app-feed-create></app-feed-create>

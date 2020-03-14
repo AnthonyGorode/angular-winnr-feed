@@ -18,8 +18,20 @@
         <mat-error  *ngIf="feedForm.get('url').errors?.required">
             L'url est obligatoire
         </mat-error>
-        <mat-error *ngIf="feedForm.get('url').errors?.url">
+        <mat-error *ngIf="feedForm.get('url').errors?.pattern">
             L'url n'est pas <strong>valide</strong>
         </mat-error>
+        
+        <mat-error *ngIf="isLoginToken()">
+            L'url n'est pas de type <strong>Flux Rss</strong>
+        </mat-error>
     </mat-form-field>
+    <button 
+        mat-raised-button
+        color="accent"
+        (click)="submit()"
+        [disabled]="feedForm.get('url').invalid"
+    >
+        AJOUTER FEED
+    </button>
   </form>

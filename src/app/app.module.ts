@@ -7,7 +7,6 @@ import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/materi
 import { environment } from './../environments/environment';
 
 import { AppComponent } from './app.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { HeaderComponent } from './components/partials/header/header.component';
 import { AppRoutingModule } from './app.routing';
 
@@ -17,12 +16,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { SigninComponent } from './components/auth/signin/signin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
