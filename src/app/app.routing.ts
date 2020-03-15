@@ -11,6 +11,10 @@ const routes: Routes = [
     path: "auth",
     loadChildren: () => import('./components/auth/auth.module').then(a => a.AuthModule)
   },
+  {
+    path: "users",
+    loadChildren: () => import('./components/users/users.module').then(u => u.UsersModule)
+  },
   { path: "", redirectTo: "/feeds", pathMatch: "full"},
   {path:'**', redirectTo: "/feeds", pathMatch: "full"}
 ];

@@ -11,8 +11,9 @@ export const environment = {
     projectId: "winnr-feed",
     storageBucket: "winnr-feed.appspot.com",
     messagingSenderId: "369072042630",
-    appId: "1:369072042630:web:a7583faa7c15d90084d707"}
+    appId: "1:369072042630:web:a7583faa7c15d90084d707"
   }
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

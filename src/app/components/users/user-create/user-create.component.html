@@ -1,0 +1,37 @@
+<form [formGroup]="userForm" class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Nom</mat-label>
+        <input matInput formControlName="firstname" [errorStateMatcher]="errorMatcher">
+        <mat-error  *ngIf="userForm.get('firstname').errors?.required">
+            Le nom est obligatoire
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Prénom</mat-label>
+        <input matInput formControlName="lastname" [errorStateMatcher]="errorMatcher">
+        <mat-error  *ngIf="userForm.get('lastname').errors?.required">
+            Le nom est obligatoire
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" [errorStateMatcher]="errorMatcher">
+        <mat-error  *ngIf="userForm.get('email').errors?.required">
+            Le nom est <strong>obligatoire</strong>
+        </mat-error>
+        <mat-error  *ngIf="userForm.get('email').errors?.email">
+            Le <strong>format</strong> de l'email n'est pas valide
+        </mat-error>
+    </mat-form-field>
+  
+    <button 
+        mat-raised-button
+        color="accent"
+        (click)="submit()"
+        [disabled]="userForm.invalid"
+    >
+        CREER
+    </button>
+  </form>

@@ -17,11 +17,13 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SigninComponent } from './components/auth/signin/signin.component';
+import { UsersComponent } from './components/users/users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
