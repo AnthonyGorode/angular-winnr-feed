@@ -19,7 +19,7 @@
         <mat-label>Email</mat-label>
         <input matInput formControlName="email" [errorStateMatcher]="errorMatcher">
         <mat-error  *ngIf="userForm.get('email').errors?.required">
-            Le nom est <strong>obligatoire</strong>
+            L'email est <strong>obligatoire</strong>
         </mat-error>
         <mat-error  *ngIf="userForm.get('email').errors?.email">
             Le <strong>format</strong> de l'email n'est pas valide

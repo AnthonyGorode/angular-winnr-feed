@@ -1,36 +1,40 @@
-import { AuthService } from './../../../services/auth/auth.service';
-import { Feed2jsonService } from './../../../services/feed2json/feed2json.service';
-import { Feed } from '../../../models/feed-model/feed.model';
-import { FeedsService } from './../../../services/feeds/feeds.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Feed } from 'src/app/models/feed-model/feed.model';
 import { Article } from 'src/app/models/feed-model/article.model';
 import { Subscription } from 'rxjs';
+import { FeedsService } from 'src/app/services/feeds/feeds.service';
+import { Feed2jsonService } from 'src/app/services/feed2json/feed2json.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
-  selector: 'app-feeds-list',
-  templateUrl: './feeds-list.component.html',
-  styleUrls: ['./feeds-list.component.scss']
+  selector: 'app-feeds-user',
+  templateUrl: './feeds-user.component.html',
+  styleUrls: ['./feeds-user.component.scss']
 })
-export class FeedsListComponent implements OnInit, OnDestroy {
+export class FeedsUserComponent implements OnInit, OnDestroy {
 
   public feed: Feed;
   public articles: Array<Article>;
   public feedsList: Array<{id: string, feed: Feed}> = [];
+  public feedsUser: Array<Feed> = [];
 
   public isAuthenticated: boolean = false;
-  public isAdmin: boolean = false;
   private authListener: Subscription;
+
+  private uidUser: string;
 
   constructor(
     private feedsService: FeedsService,
     private feed2jsonService: Feed2jsonService,
-    private authService: AuthService
+    private authService: AuthService,
+    private usersService: UsersService
   ) { }
 
   ngOnInit(): void {
     this.checkIsAuthenticated();
-    this.checkIsAdmin();
-    
+    this.getAuthUid();
+
     this.getFeeds();
   }
 
@@ -44,28 +48,31 @@ export class FeedsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  private checkIsAdmin(): void {
-    this.authService.isAdmin().subscribe(
-      res => this.isAdmin = res,
+  private getAuthUid(): void {
+    this.authService.getAuthUid().subscribe(
+      uid => this.uidUser = uid,
       err => console.error(err)
     );
   }
 
   public getFeeds(): void {
-    this.feedsService.getAllFeeds().subscribe(
-      res => {
-        this.feedsList = [];
-        res.map(doc => {
-          this.feedsList.push({
-            "id": doc.payload.doc.id,
-            "feed": doc.payload.doc.data()
-          });
-        });
+    this.authService.user.subscribe(
+      user => {
+        const feeds = user.feeds;
+        
 
-        console.log(this.feedsList);
-      },
-      err => console.error(err)
-    );
+        this.feedsList = [];
+        this.feedsUser = [];
+        feeds.map((feed,index) => {
+          this.feedsList.push({
+            "id": index,
+            "feed": feed
+          });
+          this.feedsUser.push(feed);
+        });
+        
+      }, err => console.error(err))
+  
   }
 
   public getFeedArticles(url: string): void {
@@ -88,9 +95,10 @@ export class FeedsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  public deleteRss(event: Event,uid: string): void {
+  public deleteRss(event: Event,index: number): void {
     event.stopPropagation();
-    this.feedsService.deleteFeed(uid);
+    this.feedsUser.splice(index,1);
+    this.usersService.updateFeedUser(this.feedsUser, this.uidUser);
   }
 
   ngOnDestroy(): void {

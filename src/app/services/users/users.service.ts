@@ -4,20 +4,23 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from 'firebase';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireFunctions } from '@angular/fire/functions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   private httpOptions: any;
-  private baseUrl: string = "http://localhost:5000/winnr-feed/us-central1/winnr_manage_users/api/users";
+  private baseUrl: string = "https://us-central1-winnr-feed.cloudfunctions.net/winnr_manage_users/api/users";
 
   constructor(
     private firestore: AngularFirestore,
     private fireauth: AngularFireAuth,
+    private firefunction: AngularFireFunctions,
     private http: HttpClient,
   ) {
     this.initHeaders();
+    // this.fireauth.auth.onAuthStateChanged
   }
 
   private initHeaders(): void {
@@ -30,20 +33,28 @@ export class UsersService {
   }
 
   public getAllUsers(): Observable<any> {
-    return this.firestore.collection("users").snapshotChanges();
+    return this.firestore.collection("users", ref => ref.where("role","==","user")).snapshotChanges();
+  }
+
+  public getUserByUid(uid: string): Observable<any> {
+    return this.firestore.doc(`users/${uid}`).snapshotChanges();
+  }
+
+  public updateFeedUser(feeds: Array<any>,uid: string): void {
+    this.firestore.doc(`users/${uid}`).update({
+      feeds
+    });
   }
 
   public addUser(user: User): Observable<any> {
-    const data = {uid: "", user};
-    return this.http.post(
-      this.baseUrl,
-      data,
-      this.httpOptions
-    );
+    
+    const add_new_user = this.firefunction.httpsCallable("add_new_user");
+    return add_new_user(user);
   }
 
   public removeUser(uid: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${uid}`,this.httpOptions);
+    const remove_user = this.firefunction.httpsCallable("remove_user");
+    return remove_user(uid);
   }
 
   public sendResetPassword(email: string): void {

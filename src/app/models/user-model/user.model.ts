@@ -8,4 +8,5 @@ export interface User {
     role?: string;
     createdAt?: string;
     feeds?: Array<Feed>;
+    feed_last_modification?: string;
 }

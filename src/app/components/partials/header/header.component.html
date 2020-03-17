@@ -2,7 +2,8 @@
     <span><a routerLink="/">WINNR-FEED</a></span>
     <ul>      
         <li><a mat-button routerLink="/feeds" routerLinkActive="mat-accent">Accueil</a></li>
-        <li><a mat-button routerLink="/users" routerLinkActive="mat-accent">Utilisateurs</a></li>
+        <li *ngIf="isAuthenticated"><a mat-button routerLink="/feeds/user" routerLinkActive="mat-accent">Mes Flux</a></li>
+        <li *ngIf="isAuthenticated"><a mat-button routerLink="/users" routerLinkActive="mat-accent">Utilisateurs</a></li>
     </ul>
     <span class="spacer"></span>
     <ul>

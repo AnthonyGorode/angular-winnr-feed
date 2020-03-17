@@ -1,6 +1,7 @@
-import { FeedsModule } from './components/feeds/feeds.module';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { AuthGuard } from './guards/auth.guard';
+import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
   { 
@@ -13,7 +14,8 @@ const routes: Routes = [
   },
   {
     path: "users",
-    loadChildren: () => import('./components/users/users.module').then(u => u.UsersModule)
+    loadChildren: () => import('./components/users/users.module').then(u => u.UsersModule),
+    canActivate: [AuthGuard,RoleGuard]
   },
   { path: "", redirectTo: "/feeds", pathMatch: "full"},
   {path:'**', redirectTo: "/feeds", pathMatch: "full"}

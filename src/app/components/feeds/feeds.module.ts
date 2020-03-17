@@ -10,8 +10,9 @@ import { FeedsRoutingModule } from './feeds.routing';
 import { FeedsListComponent } from './feeds-list/feeds-list.component';
 import { FeedsComponent } from './feeds.component';
 import { FeedArticlesComponent } from './feed-articles/feed-articles.component';
-import { FeedCreateComponent } from './feed-create/feed-create/feed-create.component';
+import { FeedCreateComponent } from './feed-create/feed-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FeedsUserComponent } from './feeds-user/feeds-user.component';
 
 @NgModule({
     declarations: [      
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         FeedsListComponent,
         FeedArticlesComponent,
         FeedCreateComponent,
+        FeedsUserComponent,
     ],
     imports: [
         CommonModule,     

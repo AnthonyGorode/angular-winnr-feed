@@ -9,7 +9,8 @@ import { MainFeed } from 'src/app/models/feed-model/main-feed.model';
 })
 export class Feed2jsonService {
 
-  private baseUrl: string = "http://feed-api-parser.eu-west-3.elasticbeanstalk.com/api/feed";
+  private awsUrl: string = "http://feed-api-parser.eu-west-3.elasticbeanstalk.com/api/feed";
+  private firebaseUrl: string = "https://us-central1-winnr-feed.cloudfunctions.net/parser_feeds_api/api/feed";
 
   constructor(
     private http: HttpClient
@@ -20,11 +21,11 @@ export class Feed2jsonService {
    * @param url Rss feed url
    */
   testUrl(url: string): Observable<MainFeed | any> {
-    return this.http.get<MainFeed>(`${this.baseUrl}?url_feed=${url}`);
+    return this.http.get<MainFeed>(`${this.firebaseUrl}?url_feed=${url}`);
   }
 
   getFeedsArticles(url: string): Observable<MainFeed> {
-    return this.http.get<MainFeed>(`${this.baseUrl}?url_feed=${url}`)
+    return this.http.get<MainFeed>(`${this.firebaseUrl}?url_feed=${url}`)
             .pipe(
               map(this.extractFeeds),
               catchError(this.handleError)
