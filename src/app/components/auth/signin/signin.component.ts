@@ -2,6 +2,7 @@ import { AuthService } from './../../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomErrorStateMatcherService } from 'src/app/services/custom-error-state-matcher/custom-error-state-matcher.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-signin',
@@ -10,12 +11,15 @@ import { CustomErrorStateMatcherService } from 'src/app/services/custom-error-st
 })
 export class SigninComponent implements OnInit {
 
+  public isLoading: boolean = false;
+
   public userForm: FormGroup;
   public errorMatcher = new CustomErrorStateMatcherService();
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -29,14 +33,24 @@ export class SigninComponent implements OnInit {
     });
   }
 
-  public submit(): void {
-
+  public async submit() {
+    
     if(this.userForm.invalid) return;
 
-    const { email, password } = this.userForm.value;
-    this.authService.signin(email,password);
+    this.isLoading = true;
 
-    this.userForm.reset();
+    const { email, password } = this.userForm.value;
+
+    try {
+      await this.authService.signin(email,password);
+      this.userForm.reset();
+    } catch (error) {
+      this.snackbar.open("Une erreur est survenu réessayer plus tard !","X",{
+        duration: 3000
+      }); 
+    }    
+    this.isLoading = false;
+     
   }
 
 }

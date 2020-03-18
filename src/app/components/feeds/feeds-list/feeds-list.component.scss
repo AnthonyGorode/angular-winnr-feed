@@ -13,14 +13,17 @@
                 border-radius: 6px;
                 background-color: aliceblue;
     
-                span {
-                    color: #fff;
-                    background-color: red;
+                button {
+                    // color: #fff;
                     margin-left: auto;
-                    width: 3vh;
-                    text-align: center;
-                    border-radius: 10px;
-                    font-weight: bold;
+                    border: initial;
+                    border-radius: 0;
+                    // width: 3vh;
+                    // text-align: center;
+                    // border-radius: 10px;
+                    font-weight: 900;
+                    font-size: 20px;
+                    
                 }
             }
         }

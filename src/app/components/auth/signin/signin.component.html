@@ -1,30 +1,34 @@
-<form [formGroup]="userForm" class="example-form">
-
-    <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" [errorStateMatcher]="errorMatcher">
-        <mat-error  *ngIf="userForm.get('email').errors?.required">
-            L'email est <strong>obligatoire</strong>
-        </mat-error>
-        <mat-error  *ngIf="userForm.get('email').errors?.email">
-            Le <strong>format</strong> de l'email n'est pas valide
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="example-full-width">
-        <mat-label>Mot de passe</mat-label>
-        <input matInput type="password" formControlName="password" [errorStateMatcher]="errorMatcher">
-        <mat-error  *ngIf="userForm.get('password').errors?.required">
-            Le mot de passe est obligatoire
-        </mat-error>
-    </mat-form-field>
-  
-    <button 
-        mat-raised-button
-        color="accent"
-        (click)="submit()"
-        [disabled]="userForm.invalid"
-    >
-        CREER
-    </button>
-  </form>
+<div class="wrapper">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <h1 class="title_Main" *ngIf="!isLoading">Je me Connecte</h1>
+    <form [formGroup]="userForm" class="example-form" *ngIf="!isLoading">
+    
+        <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" [errorStateMatcher]="errorMatcher">
+            <mat-error  *ngIf="userForm.get('email').errors?.required">
+                L'email est <strong>obligatoire</strong>
+            </mat-error>
+            <mat-error  *ngIf="userForm.get('email').errors?.email">
+                Le <strong>format</strong> de l'email n'est pas valide
+            </mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <mat-label>Mot de passe</mat-label>
+            <input matInput type="password" formControlName="password" [errorStateMatcher]="errorMatcher">
+            <mat-error  *ngIf="userForm.get('password').errors?.required">
+                Le mot de passe est obligatoire
+            </mat-error>
+        </mat-form-field>
+      
+        <button 
+            mat-raised-button
+            color="accent"
+            (click)="submit()"
+            [disabled]="userForm.invalid"
+        >
+            CREER
+        </button>
+      </form>
+</div>

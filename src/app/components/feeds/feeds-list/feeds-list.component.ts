@@ -16,6 +16,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
   public feed: Feed;
   public articles: Array<Article>;
   public feedsList: Array<{id: string, feed: Feed}> = [];
+  public isLoading: boolean = false;
 
   public isAuthenticated: boolean = false;
   public isAdmin: boolean = false;
@@ -69,6 +70,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
   }
 
   public getFeedArticles(url: string): void {
+    this.isLoading = true;
     this.feed2jsonService.getFeedsArticles(url).subscribe(
       res => {
         const parser = new DOMParser();
@@ -83,8 +85,12 @@ export class FeedsListComponent implements OnInit, OnDestroy {
         });
         this.feed = res.feed;
         this.articles = res.items;
+        this.isLoading = false;
       },
-      err => console.error(err)
+      err => {
+        console.error(err);
+        this.isLoading = false;
+      }
     );
   }
 

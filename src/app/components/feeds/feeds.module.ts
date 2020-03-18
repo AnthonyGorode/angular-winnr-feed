@@ -13,6 +13,8 @@ import { FeedArticlesComponent } from './feed-articles/feed-articles.component';
 import { FeedCreateComponent } from './feed-create/feed-create.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FeedsUserComponent } from './feeds-user/feeds-user.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [      
@@ -30,7 +32,9 @@ import { FeedsUserComponent } from './feeds-user/feeds-user.component';
         MatInputModule,
         MatExpansionModule,
         MatButtonModule,
-        FeedsRoutingModule
+        FeedsRoutingModule,
+        MatProgressSpinnerModule,
+        MatSnackBarModule
     ],
 })
 export class FeedsModule { }

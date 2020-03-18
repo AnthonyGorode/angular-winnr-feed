@@ -1,8 +1,21 @@
-table {
-    width: 100%;
+@import '../../../../styles/global/title';
 
-    .button_x {
-        font-weight: 900;
-        font-size: 20px;
+.wrapper {
+    display: flex;
+    width: 100%;
+    .block_table {
+        width: 60%;
+        margin: 10px;
+        table {
+            width: 100%;
+        
+            .button_x {
+                font-weight: 900;
+                font-size: 20px;
+            }
+        }
+    }
+    app-user-create {
+        width: 40%;
     }
 }

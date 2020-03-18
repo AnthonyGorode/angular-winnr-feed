@@ -11,6 +11,7 @@ export class FeedArticlesComponent implements OnInit,OnChanges {
 
   @Input() feed: Feed;
   @Input() articles: Array<Article> = [];
+  @Input() isLoading: boolean = false;
 
   constructor() { }
 
