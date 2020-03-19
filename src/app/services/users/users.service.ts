@@ -16,12 +16,8 @@ export class UsersService {
   constructor(
     private firestore: AngularFirestore,
     private fireauth: AngularFireAuth,
-    private firefunction: AngularFireFunctions,
-    private http: HttpClient,
-  ) {
-    this.initHeaders();
-    // this.fireauth.auth.onAuthStateChanged
-  }
+    private firefunction: AngularFireFunctions
+  ) { }
 
   private initHeaders(): void {
     this.httpOptions = {

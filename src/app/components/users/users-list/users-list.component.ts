@@ -22,13 +22,14 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-
+    
     this.getListUsers();
   }
 
   public getListUsers(): void {
     this.usersService.getAllUsers().subscribe(
       res => {
+        // console.log(res);
         let arrayUsers = [];
         res.map(doc => {
           let user = {
@@ -37,7 +38,7 @@ export class UsersListComponent implements OnInit {
           };
           arrayUsers.push(user);
         });
-        console.log(arrayUsers);
+        // console.log(arrayUsers);
         this.dataSource.data = arrayUsers;
       },
       err => console.error(err)
