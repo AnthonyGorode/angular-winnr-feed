@@ -7,7 +7,7 @@
                 (click)="getFeedArticles(item.feed.url)"
             > 
                 {{ item.feed.name }}
-                <span *ngIf="isAuthenticated" (click)="deleteRss($event,item.id)">x</span> 
+                <button mat-icon-button class="btn_delete_element" color="warn" *ngIf="isAuthenticated" (click)="deleteRss($event,item.id)">x</button> 
             </button>
         </mat-action-list>
         <app-feed-create status="update" [feedsUser]="feedsUser" *ngIf="isAuthenticated"></app-feed-create>

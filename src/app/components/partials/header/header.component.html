@@ -13,7 +13,7 @@
                 Mes Flux
             </a>
         </li>
-        <li *ngIf="isAuthenticated">
+        <li *ngIf="isAuthenticated && isAdmin">
             <a mat-button routerLink="/users" routerLinkActive="mat-accent">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">people</mat-icon>
                 Utilisateurs

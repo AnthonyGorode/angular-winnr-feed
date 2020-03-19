@@ -1,3 +1,5 @@
+@import "../../../../styles/global/button";
+
 .wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -14,16 +16,9 @@
                 background-color: aliceblue;
     
                 button {
-                    // color: #fff;
                     margin-left: auto;
                     border: initial;
-                    border-radius: 0;
-                    // width: 3vh;
-                    // text-align: center;
-                    // border-radius: 10px;
-                    font-weight: 900;
-                    font-size: 20px;
-                    
+                    border-radius: 0;               
                 }
             }
         }

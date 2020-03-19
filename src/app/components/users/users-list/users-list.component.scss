@@ -1,4 +1,5 @@
 @import '../../../../styles/global/title';
+@import '../../../../styles/global/button';
 
 .wrapper {
     display: flex;
@@ -8,11 +9,6 @@
         margin: 10px;
         table {
             width: 100%;
-        
-            .button_x {
-                font-weight: 900;
-                font-size: 20px;
-            }
         }
     }
     app-user-create {

@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit, OnDestroy {
 
   public isAuthenticated: boolean = false;
+  public isAdmin: boolean = false;
   private authListener: Subscription;
 
   constructor(
@@ -18,13 +19,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkIsAuthenticated();
-    this.authListener = this.authService.authStatus.subscribe(
-      res => {
-        this.isAuthenticated = res;
-        console.log("HERE NAV => ",this.isAuthenticated);
-      },
-      err => console.error(err)
-    );
+    this.checkIsAdmin();
   }
 
   private checkIsAuthenticated(): void {
@@ -33,6 +28,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if(res) this.isAuthenticated = true;
         else this.isAuthenticated = false;
       },
+      err => console.error(err)
+    );
+  }
+
+  private checkIsAdmin(): void {
+    this.authService.isAdmin().subscribe(
+      res => this.isAdmin = res,
       err => console.error(err)
     );
   }

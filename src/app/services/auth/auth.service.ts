@@ -40,7 +40,8 @@ export class AuthService {
       this._authStatus.next(true);
       this.router.navigate(["/feeds"]);
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      throw(error);
     }
   }
 

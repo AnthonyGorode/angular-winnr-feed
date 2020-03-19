@@ -1,6 +1,6 @@
 <div class="wrapper">
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <h1 class="title_Main" *ngIf="!isLoading">Je me Connecte</h1>
+    <h1 class="title_main" *ngIf="!isLoading">Je me Connecte</h1>
     <form [formGroup]="userForm" class="example-form" *ngIf="!isLoading">
     
         <mat-form-field class="example-full-width">
@@ -28,7 +28,7 @@
             (click)="submit()"
             [disabled]="userForm.invalid"
         >
-            CREER
+            CONNEXION
         </button>
       </form>
 </div>

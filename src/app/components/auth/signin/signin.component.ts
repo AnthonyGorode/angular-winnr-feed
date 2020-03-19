@@ -16,6 +16,8 @@ export class SigninComponent implements OnInit {
   public userForm: FormGroup;
   public errorMatcher = new CustomErrorStateMatcherService();
 
+  private errorCodeAuth: Array<string> = ["auth/user-not-found","auth/wrong-password"];
+
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -45,7 +47,12 @@ export class SigninComponent implements OnInit {
       await this.authService.signin(email,password);
       this.userForm.reset();
     } catch (error) {
-      this.snackbar.open("Une erreur est survenu réessayer plus tard !","X",{
+      let message = "Une erreur est survenu réessayez plus tard !";
+
+      if(error?.code && this.errorCodeAuth.includes(error?.code)) 
+        message = "Les identifiants sont incorrectes, réessayez !";
+
+      this.snackbar.open(message,"X",{
         duration: 3000
       }); 
     }    

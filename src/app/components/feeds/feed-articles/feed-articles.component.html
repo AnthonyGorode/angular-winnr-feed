@@ -14,7 +14,7 @@
                     <img [src]="article.enclosure?.link" [alt]="article.title">
                 </div>
     
-                <p>{{ article.description }}</p>
+                <p class="description_article" [innerHTML]="article.description"></p>
             </a>
         </mat-expansion-panel>
     </mat-accordion>

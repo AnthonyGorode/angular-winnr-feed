@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { MainFeed } from 'src/app/models/feed-model/main-feed.model';
@@ -12,9 +12,17 @@ export class Feed2jsonService {
   private awsUrl: string = "http://feed-api-parser.eu-west-3.elasticbeanstalk.com/api/feed";
   private firebaseUrl: string = "https://us-central1-winnr-feed.cloudfunctions.net/parser_feeds_api/api/feed";
 
+  private options: Object;
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    // this.options = {
+    //   headers: new HttpHeaders({ 
+    //     'Access-Control-Allow-Headers':'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    //   })
+    // };
+  }
 
   /**
    * this method check if this url is a valid rss feed
@@ -25,7 +33,7 @@ export class Feed2jsonService {
   }
 
   getFeedsArticles(url: string): Observable<MainFeed> {
-    return this.http.get<MainFeed>(`${this.awsUrl}?url_feed=${url}`)
+    return this.http.get<MainFeed>(`${this.awsUrl}?url_feed=${url}`,this.options)
             .pipe(
               map(this.extractFeeds),
               catchError(this.handleError)
