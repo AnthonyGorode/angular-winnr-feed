@@ -1,13 +1,13 @@
-<div class="wrapper">
+<div class="wrapper" fxLayout="row wrap">
     <div class="block_feed">
         <mat-action-list>
-            <button 
+            <button
                 *ngFor="let item of feedsList"
-                mat-list-item 
+                mat-list-item
                 (click)="getFeedArticles(item.feed.url)"
-            > 
+            >
                 {{ item.feed.name }}
-                <button mat-icon-button class="btn_delete_element" color="warn" *ngIf="isAuthenticated && isAdmin" (click)="deleteRss($event,item.id)">x</button> 
+                <button mat-icon-button class="btn_delete_element" color="warn" *ngIf="isAuthenticated && isAdmin" (click)="deleteRss($event,item.id)">x</button>
             </button>
         </mat-action-list>
         <app-feed-create status="create" *ngIf="isAuthenticated && isAdmin"></app-feed-create>
