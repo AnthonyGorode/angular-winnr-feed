@@ -65,4 +65,8 @@ fdescribe('UsersListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('check source data contains users',() => {
+      expect(component.dataSource.data).not.toBeNull();
+  });
 });
