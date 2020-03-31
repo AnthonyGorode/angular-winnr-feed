@@ -7,16 +7,18 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "cypress:open": "node_modules/.bin/cypress open"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.0",
-    "@angular/cdk": "^9.1.2",
+    "@angular/cdk": "^9.2.0",
     "@angular/common": "~9.0.0",
     "@angular/compiler": "~9.0.0",
     "@angular/core": "~9.0.0",
     "@angular/fire": "^5.4.2",
+    "@angular/flex-layout": "^9.0.0-beta.29",
     "@angular/forms": "~9.0.0",
     "@angular/material": "^9.1.2",
     "@angular/platform-browser": "~9.0.0",
@@ -28,14 +30,15 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.900.1",
-    "@angular/cli": "~9.0.1",
+    "@angular-devkit/build-angular": "^0.901.0",
+    "@angular/cli": "^9.1.0",
     "@angular/compiler-cli": "~9.0.0",
     "@angular/language-service": "~9.0.0",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "cypress": "^4.3.0",
     "https-proxy-agent": "^5.0.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
