@@ -7,24 +7,34 @@
 
     .block_feed {
         width: 25%;
-        
+
         mat-action-list {
             padding: 5px;
             button {
                 border: 1px solid #a9a9a954;
                 border-radius: 6px;
                 background-color: aliceblue;
-    
+
                 button {
                     margin-left: auto;
                     border: initial;
-                    border-radius: 0;               
+                    border-radius: 0;
                 }
             }
+        }
+
+        @media screen and (max-width: 755px) {
+          width: 100%;
         }
     }
 
     app-feed-articles {
         width: 74%;
+
+        @media screen and (max-width: 755px) {
+          width: 100%;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
     }
 }

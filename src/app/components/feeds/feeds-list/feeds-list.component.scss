@@ -22,9 +22,19 @@
                 }
             }
         }
+
+        @media screen and (max-width: 755px) {
+          width: 100%;
+        }
     }
 
     app-feed-articles {
         width: 74%;
+
+        @media screen and (max-width: 755px) {
+          width: 100%;
+          margin-left: 5px;
+          margin-right: 5px;
+        }
     }
 }

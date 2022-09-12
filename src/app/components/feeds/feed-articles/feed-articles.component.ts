@@ -16,11 +16,11 @@ export class FeedArticlesComponent implements OnInit,OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
   ngOnChanges(): void {
-    console.log(this.articles);
+    // console.log(this.articles);
   }
 
   public loadArticles() {}

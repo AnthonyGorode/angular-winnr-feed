@@ -10,12 +10,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  declarations: [
-    AuthComponent,
-    SigninComponent
-  ],
+  declarations: [AuthComponent, SigninComponent],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -24,7 +22,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+    MatCardModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -18,6 +18,7 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
   public articles: Array<Article>;
   public feedsList: Array<{id: string, feed: Feed}> = [];
   public feedsUser: Array<Feed> = [];
+  public isLoading: boolean = false;
 
   public isAuthenticated: boolean = false;
   private authListener: Subscription;
@@ -59,7 +60,7 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
     this.authService.user.subscribe(
       user => {
         const feeds = user.feeds;
-        
+
 
         this.feedsList = [];
         this.feedsUser = [];
@@ -70,12 +71,13 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
           });
           this.feedsUser.push(feed);
         });
-        
+
       }, err => console.error(err))
-  
+
   }
 
   public getFeedArticles(url: string): void {
+    this.isLoading = true;
     this.feed2jsonService.getFeedsArticles(url).subscribe(
       res => {
         const parser = new DOMParser();
@@ -90,14 +92,18 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
         });
         this.feed = res.feed;
         this.articles = res.items;
+        this.isLoading = false;
       },
-      err => console.error(err)
+      err => {
+        this.isLoading = false;
+        console.error(err);
+      }
     );
   }
 
-  public deleteRss(event: Event,index: number): void {
+  public deleteRss(event: Event, index: number): void {
     event.stopPropagation();
-    this.feedsUser.splice(index,1);
+    this.feedsUser.splice(index, 1);
     this.usersService.updateFeedUser(this.feedsUser, this.uidUser);
   }
 

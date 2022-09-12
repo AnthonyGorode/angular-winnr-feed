@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
     <span><a routerLink="/">WINNR-FEED</a></span>
-    <ul>      
+    <ul fxHide.xs>
         <li>
             <a mat-button routerLink="/feeds" routerLinkActive="mat-accent">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
@@ -21,7 +21,7 @@
         </li>
     </ul>
     <span class="spacer"></span>
-    <ul>
+    <ul fxHide.xs>
         <li *ngIf="!isAuthenticated">
             <a mat-button routerLink="/auth/signin" routerLinkActive="mat-accent">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
@@ -35,5 +35,30 @@
             </a>
         </li>
     </ul>
+
+    <button fxHide.sm fxHide.md fxHide.xl fxHide.lg mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button routerLink="/feeds" mat-menu-item>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
+        Accueil
+      </button>
+      <button *ngIf="isAuthenticated" routerLink="/feeds/user" mat-menu-item>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">poll</mat-icon>
+        Mes Flux
+      </button>
+      <button *ngIf="isAuthenticated && isAdmin" routerLink="/users" mat-menu-item>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">people</mat-icon>
+        Utilisateurs
+      </button>
+      <mat-divider></mat-divider>
+      <button *ngIf="!isAuthenticated" routerLink="/auth/signin" mat-menu-item>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
+        Connexion
+      </button>
+      <button *ngIf="isAuthenticated" (click)="logout()" mat-menu-item>
+        <mat-icon aria-hidden="false" aria-label="Example home icon">whatshot</mat-icon>
+        Deconnexion
+      </button>
+    </mat-menu>
 </mat-toolbar>
 

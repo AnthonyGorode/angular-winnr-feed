@@ -18,9 +18,26 @@
     width: 30%;
     margin: auto;
     margin-top: 20px;
+
+    @media screen and (max-width: 775px) {
+      width: 80%;
+    }
   }
-  
+
   .example-full-width {
     width: 100%;
+  }
+
+  mat-card {
+    position: absolute;
+    top: 90px;
+    left: 20px;
+
+    @media screen and (max-width: 775px) {
+      position: inherit;
+      margin-top: 20px;
+      margin-left: 5%;
+      margin-right: 5%;
+    }
   }
 }

@@ -31,7 +31,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.checkIsAuthenticated();
     this.checkIsAdmin();
-    
+
     this.getFeeds();
   }
 
@@ -63,7 +63,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
           });
         });
 
-        console.log(this.feedsList);
+        // console.log(this.feedsList);
       },
       err => console.error(err)
     );

@@ -40,7 +40,7 @@ export class AuthService {
       this._authStatus.next(true);
       this.router.navigate(["/feeds"]);
     } catch (error) {
-      console.log(error);
+      console.error(error);
       throw(error);
     }
   }
@@ -49,11 +49,11 @@ export class AuthService {
     try {
       await this.fireAuth.auth.signOut();
       this._authStatus.next(false);
-      this.router.navigate(["/feeds"]); 
+      this.router.navigate(["/feeds"]);
     } catch (error) {
       console.error(error);
     }
-    
+
   }
 
   public isAuthenticated(): Observable<boolean> {
