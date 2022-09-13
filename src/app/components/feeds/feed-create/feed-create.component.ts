@@ -40,10 +40,9 @@ export class FeedCreateComponent implements OnInit {
   }
 
   private initForm(): void {
-    const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
     this.feedForm = this.formBuilder.group({
       name: ["",[Validators.required],[]],
-      url: ["",[Validators.required,Validators.pattern(reg)],[]]
+      url: ["",[Validators.required],[]]
     });
   }
 
@@ -100,6 +99,7 @@ export class FeedCreateComponent implements OnInit {
         this.feedForm.reset();
       },
       err => {
+        console.error(err);
         this.feedForm.get('url').setErrors( { "urlIsInvalid": true });
         this.loadingSubmit = false;
       }

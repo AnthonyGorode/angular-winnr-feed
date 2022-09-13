@@ -1,27 +1,30 @@
 <mat-toolbar color="primary">
-    <span><a routerLink="/">WINNR-FEED</a></span>
-    <ul fxHide.xs>
+    <span id="title-app"><a routerLink="/">WINNR-FEED</a></span>
+    <div class="uploader-status">
+      <mat-spinner *ngIf="isLoadingAuth" diameter="30"></mat-spinner>
+    </div>
+    <ul *ngIf="!isLoadingAuth" fxHide.xs>
         <li>
-            <a mat-button routerLink="/feeds" routerLinkActive="mat-accent">
+            <a mat-button routerLink="/feeds" routerLinkActive="mat-accent" [ngClass]="{'focus': (path == '/feeds')}">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
                 Accueil
             </a>
         </li>
         <li *ngIf="isAuthenticated">
-            <a mat-button routerLink="/feeds/user" routerLinkActive="mat-accent">
+            <a mat-button routerLink="/feeds/user" routerLinkActive="mat-accent" [ngClass]="{'focus': (path == '/feeds/user')}">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">poll</mat-icon>
                 Mes Flux
             </a>
         </li>
         <li *ngIf="isAuthenticated && isAdmin">
-            <a mat-button routerLink="/users" routerLinkActive="mat-accent">
+            <a mat-button routerLink="/users" routerLinkActive="mat-accent" [ngClass]="{'focus': (path == '/users')}">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">people</mat-icon>
                 Utilisateurs
             </a>
         </li>
     </ul>
     <span class="spacer"></span>
-    <ul fxHide.xs>
+    <ul *ngIf="!isLoadingAuth" fxHide.xs>
         <li *ngIf="!isAuthenticated">
             <a mat-button routerLink="/auth/signin" routerLinkActive="mat-accent">
                 <mat-icon aria-hidden="false" aria-label="Example home icon">account_circle</mat-icon>
@@ -36,8 +39,8 @@
         </li>
     </ul>
 
-    <button fxHide.sm fxHide.md fxHide.xl fxHide.lg mat-button [matMenuTriggerFor]="menu">Menu</button>
-    <mat-menu #menu="matMenu">
+    <button *ngIf="!isLoadingAuth" fxHide.sm fxHide.md fxHide.xl fxHide.lg mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu  #menu="matMenu">
       <button routerLink="/feeds" mat-menu-item>
         <mat-icon aria-hidden="false" aria-label="Example home icon">home</mat-icon>
         Accueil

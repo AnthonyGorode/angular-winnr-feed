@@ -32,20 +32,32 @@ export class Feed2jsonService {
    * @param url Rss feed url
    */
   testUrl(url: string): Observable<MainFeed | any> {
-    const callable = this.functions.httpsCallable('onCallParserXml');
-    return callable({url_feed: url});
-    // return this.http.get<MainFeed>(`${this.cloudRunUrl}?url_feed=${url}`);
+    return this.http.get<MainFeed>(`${this.cloudRunUrl}?url_feed=${url}`);
   }
 
   getFeedsArticles(url: string): Observable<MainFeed> {
-    const callable = this.functions.httpsCallable('onCallParserXml');
-    return callable({url_feed: url});
-    // .pipe(
-    //   map(this.extractFeeds),
-    //   catchError(this.handleError)
-    // );
-    // return this.http.get<MainFeed>(`${this.cloudRunUrl}?url_feed=${url}`);
+    return this.http.get<MainFeed>(`${this.cloudRunUrl}?url_feed=${url}`,this.options)
+            .pipe(
+              map(this.extractFeeds),
+              catchError(this.handleError)
+            );
   }
+
+  // testUrl(url: string): Observable<MainFeed | any> {
+  //   const callable = this.functions.httpsCallable('onCallParserXml');
+  //   return callable({url_feed: url});
+  //   // return this.http.get<MainFeed>(`${this.cloudRunUrl}?url_feed=${url}`);
+  // }
+
+  // getFeedsArticles(url: string): Observable<MainFeed> {
+  //   const callable = this.functions.httpsCallable('onCallParserXml');
+  //   return callable({url_feed: url});
+  //   // .pipe(
+  //   //   map(this.extractFeeds),
+  //   //   catchError(this.handleError)
+  //   // );
+  //   // return this.http.get<MainFeed>(`${this.cloudRunUrl}?url_feed=${url}`);
+  // }
 
   private extractFeeds(data: MainFeed): MainFeed {
     return data;
