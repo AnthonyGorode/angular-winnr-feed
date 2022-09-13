@@ -16,7 +16,9 @@ export class FeedsListComponent implements OnInit, OnDestroy {
   public feed: Feed;
   public articles: Array<Article>;
   public feedsList: Array<{id: string, feed: Feed}> = [];
+  public isLoadingFeeds: boolean = false;
   public isLoading: boolean = false;
+  public currentFeedFocused: number;
 
   public isAuthenticated: boolean = false;
   public isAdmin: boolean = false;
@@ -53,6 +55,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
   }
 
   public getFeeds(): void {
+    this.isLoadingFeeds = true;
     this.feedsService.getAllFeeds().subscribe(
       res => {
         this.feedsList = [];
@@ -63,14 +66,23 @@ export class FeedsListComponent implements OnInit, OnDestroy {
           });
         });
 
-        // console.log(this.feedsList);
+        this.isLoadingFeeds = false;
+
+        if(this.feedsList.length) {
+          const { feed } = this.feedsList[0];
+          this.getFeedArticles(feed.url, 0);
+        }
       },
-      err => console.error(err)
+      err => {
+        this.isLoadingFeeds = false;
+        console.error(err);
+      }
     );
   }
 
-  public getFeedArticles(url: string): void {
+  public getFeedArticles(url: string, index: number): void {
     this.isLoading = true;
+    this.currentFeedFocused = index;
     this.feed2jsonService.getFeedsArticles(url).subscribe(
       res => {
         const parser = new DOMParser();
@@ -90,6 +102,7 @@ export class FeedsListComponent implements OnInit, OnDestroy {
       err => {
         console.error(err);
         this.isLoading = false;
+        this.currentFeedFocused = null;
       }
     );
   }
@@ -97,6 +110,11 @@ export class FeedsListComponent implements OnInit, OnDestroy {
   public deleteRss(event: Event,uid: string): void {
     event.stopPropagation();
     this.feedsService.deleteFeed(uid);
+
+    if(uid == this.feedsList[this.currentFeedFocused].id) {
+      this.feed = null;
+      this.articles = null;
+    }
   }
 
   ngOnDestroy(): void {

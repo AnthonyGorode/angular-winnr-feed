@@ -13,6 +13,8 @@ export class FeedArticlesComponent implements OnInit,OnChanges {
   @Input() articles: Array<Article> = [];
   @Input() isLoading: boolean = false;
 
+  public tempFirstArticle: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -20,7 +22,8 @@ export class FeedArticlesComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(): void {
-    // console.log(this.articles);
+    this.tempFirstArticle = false;
+    setTimeout(() => this.tempFirstArticle = true, 2000);
   }
 
   public loadArticles() {}

@@ -1,10 +1,12 @@
+<mat-spinner *ngIf="isLoadingFeeds" diameter="30"></mat-spinner>
 <div class="wrapper" fxLayout="row wrap">
     <div class="block_feed">
         <mat-action-list>
             <button
-                *ngFor="let item of feedsList"
+                *ngFor="let item of feedsList; let i = index"
                 mat-list-item
-                (click)="getFeedArticles(item.feed.url)"
+                (click)="getFeedArticles(item.feed.url, i)"
+                [ngClass]="{'focus': (i == currentFeedFocused)}"
             >
                 {{ item.feed.name }}
                 <button mat-icon-button class="btn_delete_element" color="warn" *ngIf="isAuthenticated && isAdmin" (click)="deleteRss($event,item.id)">x</button>

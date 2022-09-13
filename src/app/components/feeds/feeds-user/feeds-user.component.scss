@@ -1,5 +1,11 @@
 @import "../../../../styles/global/button";
 
+mat-spinner {
+  position: absolute;
+  top: 200px;
+  left: 5%;
+}
+
 .wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -19,8 +25,13 @@
                     margin-left: auto;
                     border: initial;
                     border-radius: 0;
+                    background: transparent;
                 }
             }
+        }
+
+        .focus {
+          background-color: #0000002e!important;
         }
 
         @media screen and (max-width: 755px) {

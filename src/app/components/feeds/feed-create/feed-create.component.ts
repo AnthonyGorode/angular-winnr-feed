@@ -21,6 +21,7 @@ export class FeedCreateComponent implements OnInit {
   public errorMatcher = new CustomErrorStateMatcherService();
 
   public uidUser: string;
+  public loadingSubmit: boolean = false;
 
   @Input() public status: string;
   @Input() public feedsUser: Array<Feed> = [];
@@ -79,6 +80,7 @@ export class FeedCreateComponent implements OnInit {
   public submit(): void {
     if(this.feedForm.invalid) return;
 
+    this.loadingSubmit = true;
     const { name, url } = this.feedForm.value;
     const created_at = new Date().toISOString();
     this.feed2jsonService.testUrl(url).subscribe( // je teste l'async validator manuellement
@@ -94,9 +96,13 @@ export class FeedCreateComponent implements OnInit {
           this.feedsUser.push(feed);
           this.usersService.updateFeedUser(this.feedsUser,this.uidUser);
         }
+        this.loadingSubmit = false;
         this.feedForm.reset();
       },
-      err => this.feedForm.get('url').setErrors( { "urlIsInvalid": true })
+      err => {
+        this.feedForm.get('url').setErrors( { "urlIsInvalid": true });
+        this.loadingSubmit = false;
+      }
     );
   }
 

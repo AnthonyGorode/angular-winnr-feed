@@ -6,12 +6,12 @@
             Le nom est obligatoire
         </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field class="example-full-width">
         <mat-label>Url</mat-label>
-        <input 
-            matInput 
-            placeholder="ex : http://www.jeuxvideo.com/rss/rss-news.xml" 
+        <input
+            matInput
+            placeholder="ex : http://www.jeuxvideo.com/rss/rss-news.xml"
             formControlName="url"
             [errorStateMatcher]="errorMatcher"
         >
@@ -21,12 +21,14 @@
         <mat-error *ngIf="feedForm.get('url').errors?.pattern">
             L'url n'est pas <strong>valide</strong>
         </mat-error>
-        
+
         <mat-error *ngIf="isLoginToken()">
             L'url n'est pas de type <strong>Flux Rss</strong>
         </mat-error>
     </mat-form-field>
-    <button 
+    <mat-spinner *ngIf="loadingSubmit" diameter="30"></mat-spinner>
+    <button
+    *ngIf="!loadingSubmit"
         mat-raised-button
         color="accent"
         (click)="submit()"

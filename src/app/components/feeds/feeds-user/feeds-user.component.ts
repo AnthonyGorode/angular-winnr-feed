@@ -16,9 +16,11 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
 
   public feed: Feed;
   public articles: Array<Article>;
-  public feedsList: Array<{id: string, feed: Feed}> = [];
+  public feedsList: Array<{id: number, feed: Feed}> = [];
   public feedsUser: Array<Feed> = [];
   public isLoading: boolean = false;
+  public isLoadingFeeds: boolean = false;
+  public currentFeedFocused: number;
 
   public isAuthenticated: boolean = false;
   private authListener: Subscription;
@@ -57,6 +59,7 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
   }
 
   public getFeeds(): void {
+    this.isLoadingFeeds = true;
     this.authService.user.subscribe(
       user => {
         const feeds = user.feeds;
@@ -71,13 +74,20 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
           });
           this.feedsUser.push(feed);
         });
+        this.isLoadingFeeds = false;
 
-      }, err => console.error(err))
+      },
+      err => {
+        console.error(err);
+        this.isLoadingFeeds = false;
+      }
+    );
 
   }
 
-  public getFeedArticles(url: string): void {
+  public getFeedArticles(url: string, index: number): void {
     this.isLoading = true;
+    this.currentFeedFocused = index;
     this.feed2jsonService.getFeedsArticles(url).subscribe(
       res => {
         const parser = new DOMParser();
@@ -91,11 +101,13 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
             feed.title = decodedString;
         });
         this.feed = res.feed;
+        console.log("Here => ",this.feed);
         this.articles = res.items;
         this.isLoading = false;
       },
       err => {
         this.isLoading = false;
+        this.currentFeedFocused = null;
         console.error(err);
       }
     );
@@ -105,6 +117,11 @@ export class FeedsUserComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.feedsUser.splice(index, 1);
     this.usersService.updateFeedUser(this.feedsUser, this.uidUser);
+
+    if(index == this.feedsList[this.currentFeedFocused].id) {
+      this.feed = null;
+      this.articles = null;
+    }
   }
 
   ngOnDestroy(): void {
